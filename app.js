@@ -15,11 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     renderNotesList();
 
+    // Configure custom languages list for Syntax highlighting in Quill 2.0
+    const Syntax = Quill.import('modules/syntax');
+    Syntax.DEFAULTS.languages = [
+        { key: 'javascript', label: 'JavaScript' },
+        { key: 'typescript', label: 'TypeScript' },
+        { key: 'html', label: 'HTML' },
+        { key: 'css', label: 'CSS' },
+        { key: 'python', label: 'Python' },
+        { key: 'sql', label: 'SQL' }
+    ];
+
     // Initialize Quill
     const quill = new Quill('#editor-container', {
         theme: 'snow',
         placeholder: 'Start typing your note here...',
         modules: {
+            syntax: true, // Enable syntax module
             toolbar: [
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
@@ -61,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (note) {
             noteTitleInput.value = note.title;
             // Only update Quill if it's different to prevent losing cursor position
-            if (quill.root.innerHTML !== note.body) {
+            if (quill.getSemanticHTML() !== note.body) {
                 quill.root.innerHTML = note.body || '';
             }
             
@@ -79,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const noteIndex = notes.findIndex(n => n.id === currentNoteId);
         if (noteIndex !== -1) {
             notes[noteIndex].title = noteTitleInput.value;
-            notes[noteIndex].body = quill.root.innerHTML;
+            notes[noteIndex].body = quill.getSemanticHTML();
             notes[noteIndex].updatedAt = new Date().toISOString();
             
             // Move updated note to top
