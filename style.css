@@ -280,3 +280,58 @@ button:active, .icon-btn:active {
 .ql-snow .ql-toolbar button.ql-active .ql-fill {
     fill: var(--accent-color) !important;
 }
+
+/* Quill 2.0 Code Block & Dropdown Custom Styling */
+.ql-code-block-container {
+    position: relative;
+    margin: 16px 0 !important;
+}
+
+.ql-code-block-container select.ql-ui {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    z-index: 10;
+    background-color: var(--bg-hover) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 6px 12px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.75rem !important;
+    font-weight: 500;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.ql-code-block-container select.ql-ui:hover {
+    color: var(--text-primary) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.ql-code-block-container select.ql-ui option {
+    background-color: var(--bg-sidebar) !important;
+    color: var(--text-primary) !important;
+    padding: 6px !important;
+}
+
+.ql-editor pre.ql-syntax {
+    background-color: #0e1117 !important; /* Perfect atom-one-dark-like background */
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 48px 24px 24px 24px !important; /* Extra top padding for the select element position */
+    font-family: 'Fira Code', 'Courier New', Courier, monospace !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    overflow-x: auto;
+    color: #abb2bf !important; /* Default syntax text color */
+}
+
+/* Ensure selected lines in syntax highlighting look good */
+.ql-editor pre.ql-syntax::selection,
+.ql-editor pre.ql-syntax *::selection {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
